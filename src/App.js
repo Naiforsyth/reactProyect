@@ -1,17 +1,9 @@
-import imagen from './tercera_imagen.svg';
-import './App.css';
+import NavBar from "./components/NavBar/NavBar";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={imagen} className="App-logo" alt="logo" />
-        <p>
-          Nai Vergara!!
-        </p>
-      </header>
-    </div>
-  );
+const App = () =>{
+  return(
+    <NavBar/>
+  )  
 }
 
 export default App;
