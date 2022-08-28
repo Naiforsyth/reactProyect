@@ -6,8 +6,8 @@ const App = () =>{
   return(
 
     <div>
-      <NavBar/>
-      <ItemListContainer/>
+      <NavBar/>      
+      <ItemListContainer />
   </div>
 
   )  
