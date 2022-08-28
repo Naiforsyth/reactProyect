@@ -3,10 +3,10 @@ import ItemCount from '../ItemCount.js/ItemCount'
 import './ItemListContainer.scss'
 
 
-const ItemListContainer = ({stock, initial, addOn}) =>{    
+const ItemListContainer = () =>{    
     return(
       <div>
-        <ItemCount stock="5" initial = "1"/>
+        <ItemCount/>
       </div>
     )
 }
