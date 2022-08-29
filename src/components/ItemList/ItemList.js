@@ -1,20 +1,20 @@
+import Grid2 from '@mui/material/Unstable_Grid2';
+import Typography from '@mui/material/Typography'
+import Item from "../Item/item"
+import { Stack } from '@mui/system';
 
 
-const ItemList = ( {productos = []}) => {
+const ItemList = ({ productos = [] }) => {
+
   return (
-    <div>
-    <h2 className='title'>Productos</h2>
-    <hr/>
-    { productos.map((prod) =>{
-      return <div key={prod.id}>
-      <img   alt= {"jkjlk"} src  ={prod.img}/>
-      <h4>{prod.nombre}</h4>
-      <p>Precio: {prod.precio} </p>
-      <p>Stock disponible: {prod.stock} </p>
-      <p>descripcion: {prod.descripcion} </p>
-      </div>
-    })}
-    </div>
+    <Grid2 container spacing={2} columns={16}>
+      <Grid2 xs={12} md={5} lg={4}>
+      <Typography variant='h2' align='right'>Productos</Typography>
+      </Grid2>
+      <Stack direction={'row'} spacing={2} justifyContent="space-evenly"> 
+      {productos.map((prod) => <Item producto={prod} key={prod.id} />)}
+      </Stack>      
+    </Grid2>
   )
 }
 
