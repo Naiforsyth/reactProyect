@@ -6,14 +6,14 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 
-const ItemCount = () => {
+const ItemCount = ({stock}) => {
 
   const [counter, setCounter] = useState(1)
   const [agregar, SetAgregar] = useState(false)
 
   const handleSumar = () => {
 
-    if (counter < 5) {
+    if (counter < stock) {
       setCounter(counter + 1)
     }
   }
@@ -39,7 +39,7 @@ const ItemCount = () => {
           alt="Tablet"
         />
         <CardContent>
-          stock: 5
+          stock: 7
         </CardContent>
         <CardActions>
           <Button size='small' variant="contained" onClick={handleRestar}>-</Button>

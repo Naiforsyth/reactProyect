@@ -4,6 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import { Stack } from "@mui/material";
+import ItemCount from "../ItemCount.js/ItemCount";
 
 const Item = ({ producto }) => {
   return (
@@ -14,7 +15,8 @@ const Item = ({ producto }) => {
           <h4>{producto.nombre}</h4>
           <p>Precio: {producto.precio}</p>
           <small>Stock disponible: {producto.stock}</small>
-          <p>{producto.desc}</p>
+          <p>{producto.descripcion}</p>
+          <ItemCount stock="7" />
         </CardContent>
         <CardActions>
           <Button size="small" variant="contained">
