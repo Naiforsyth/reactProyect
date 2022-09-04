@@ -4,36 +4,29 @@ import pedirDatos from '../helpers/pedirDatos'
 import ItemList from '../ItemList/ItemList'
 import './ItemListContainer.scss'
 
-
-
-
 const ItemListContainer = () => {
 
   const [productos, setproductos] = useState([])
-  console.log(productos)
 
-  useEffect(() => {
-    setTimeout(() => {
+  useEffect(() => {    
       pedirDatos()
-    .then((res) => {
-      setproductos(res)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-    .finally(() => {
-      // console.log("Fin del proceso")
-    })
-    }, 2000);
-    
-}, [])
+        .then((res) => {
+          setproductos(res)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+        .finally(() => {
+          // console.log("Fin del proceso")
+        })
+  }, [])
 
 
-return (
-  <div>
-    <ItemList productos={productos} />
-  </div>
-)
+  return (
+    <div>
+      <ItemList productos={productos} />
+    </div>
+  )
 }
 
 export default ItemListContainer

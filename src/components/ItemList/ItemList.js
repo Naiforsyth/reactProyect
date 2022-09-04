@@ -1,20 +1,25 @@
-import Grid2 from '@mui/material/Unstable_Grid2';
-import Typography from '@mui/material/Typography'
-import Item from "../Item/item"
-import { Stack } from '@mui/system';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Item from '../Item/item';
+import './ItemList.scss'
 
 
 const ItemList = ({ productos = [] }) => {
 
+
   return (
-    <Grid2 container spacing={2} columns={16}>
-      <Grid2 xs={12} md={5} lg={4}>
-      <Typography variant='h2' align='right'>Productos</Typography>
-      </Grid2>
-      <Stack direction={'row'} spacing={2} justifyContent="space-evenly"> 
-      {productos.map((prod) => <Item producto={prod} key={prod.id} />)}
-      </Stack>      
-    </Grid2>
+    <Container fluid className='products' >
+      <Row>
+        <Col>
+          <p>Productos</p>
+        </Col>
+      </Row>
+      <Row  >
+        <Col className='box-container'>{productos.map((prod) => <Item producto={prod} key={prod.id} />)}
+        </Col>
+      </Row>
+    </Container>
   )
 }
 
