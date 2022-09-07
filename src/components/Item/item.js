@@ -9,7 +9,7 @@ const Item = ({ producto }) => {
       <Card>
         <Card.Img variant="top" src={producto.img} className='image' />
         <Card.Body>
-          <Card.Title>{producto.marca}</Card.Title>
+          <Card.Title>{producto.category}</Card.Title>
           <Card.Text>
             <p>{producto.nombre}</p>
             <p className='price'> <span>${producto.precio}</span></p>

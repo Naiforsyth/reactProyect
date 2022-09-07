@@ -9,7 +9,7 @@ import CardContent from '@mui/material/CardContent';
 const ItemCount = ({stock}) => {
 
   const [counter, setCounter] = useState(1)
-  const [agregar, SetAgregar] = useState(false)
+  const [agregar, setAgregar] = useState(false)
 
   const handleSumar = () => {
 
@@ -25,7 +25,7 @@ const ItemCount = ({stock}) => {
   }
 
   const handlerAgregar = () => {
-    SetAgregar(!agregar)
+    setAgregar(!agregar)
   }
 
 

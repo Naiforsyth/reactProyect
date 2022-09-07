@@ -1,32 +1,39 @@
-
-import { useEffect, useState } from 'react'
-import pedirDatos from '../helpers/pedirDatos'
-import ItemList from '../ItemList/ItemList'
-import './ItemListContainer.scss'
+import { useEffect, useState } from "react";
+import pedirDatos from "../helpers/pedirDatos";
+import ItemList from "../ItemList/ItemList";
+import { useParams } from "react-router-dom";
+import "./ItemListContainer.scss";
 
 const ItemListContainer = () => {
+  const [productos, setProductos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const [productos, setproductos] = useState([])
+  const { categoryId } = useParams();
 
-  useEffect(() => {    
-      pedirDatos()
-        .then((res) => {
-          setproductos(res)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-        .finally(() => {
-          // console.log("Fin del proceso")
-        })
-  }, [])
+  useEffect(() => {
+    setLoading(true);
 
+    pedirDatos()
+      .then((res) => {
+        if (!categoryId) {
+          setProductos(res);
+        } else {
+          setProductos(res.filter((prod) => prod.category === categoryId));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [categoryId]);
 
   return (
     <div>
-      <ItemList productos={productos} />
+      {loading ? <h2>Cargando...</h2> : <ItemList productos={productos} />}
     </div>
-  )
-}
+  );
+};
 
-export default ItemListContainer
+export default ItemListContainer;
