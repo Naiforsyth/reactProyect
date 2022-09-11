@@ -1,15 +1,12 @@
 import stock from "../../data/data"
 
-const pedirDatos = () =>{
-  return new Promise ((resolve, reject) =>{
+const pedirDatos = () => {
+  return new Promise((resolve, reject) => {
     //Cuerpo Promesa
-    setTimeout(() =>{
+    setTimeout(() => {
       resolve(stock)
     }, 1000)
-      //resolve("Promesa resulta")
-    //   reject ("Promesa rechazada")
-    // }, 3000)
-    
+
   })
 }
 

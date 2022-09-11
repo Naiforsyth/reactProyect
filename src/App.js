@@ -1,17 +1,14 @@
-// import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
 import NavBar from "./components/NavBar/NavBar";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
 import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailContainer";
-import Login  from "./components/Login/Login";
-import Cart  from "./components/Cart/Cart";
-
+import Login from "./components/Login/Login";
+import Cart from "./components/Cart/Cart";
 
 
 const App = () => {
 
   return (
-
     <BrowserRouter>
 
       <NavBar />
@@ -28,7 +25,6 @@ const App = () => {
 
       </Routes>
     </BrowserRouter>
-
   )
 }
 

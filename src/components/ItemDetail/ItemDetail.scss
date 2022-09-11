@@ -44,7 +44,7 @@ $border: 0.2rem solid $black;
     justify-content: justify;
     align-items: justify;
 
-    .title{
+    .title {
       font-size: 2rem;
       color: $black;
       font-weight: 700;
@@ -55,38 +55,53 @@ $border: 0.2rem solid $black;
         font-size: 1.2rem;
         color: $black;
         font-weight: 500;
+        text-align: justify;
 
-        span{
-          font-size: 1.5rem;
-          color:$pink;
-        }
       }
 
       :hover {
         color: $pink;
       }
+
+      .price {
+        font-size: 1.5rem;
+        color: $black;
+        text-align: center;
+
+        span {
+          font-size: 1.8rem;
+          color: $pink;
+        }
+      }
+
+      .stock {
+        font-size: 1rem;
+        color: $light-color;
+        text-align: center;
+        font-weight: 600;
+
+        span {
+          font-size: 1rem;
+          color: $light-color;
+        }
+      }
     }
 
-    :hover {
-      color: $pink;
+    .btn {
+      display: inline-block;
+      margin: 1rem;
+      padding: 0.8rem;
+      font-size: 1rem;
+      color: $black;
+      border: $border;
+      background: none;
+      cursor: pointer;
+      border-radius: 0.5rem;
+      &:hover {
+        background: $black;
+        color: $white;
+      }
     }
+
   }
-
-  .btn {
-    display: inline-block;
-    margin: 1rem;
-    padding: 0.8rem;
-    font-size: 1rem;
-    color: $black;
-    border: $border;
-    background: none;
-    cursor: pointer;
-    border-radius: 0.5rem;
-
-    &:hover {
-      background: $black;
-      color: $white;
-    }
-  }
-
 }

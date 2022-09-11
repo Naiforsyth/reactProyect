@@ -4,12 +4,10 @@ import Col from 'react-bootstrap/Col';
 import Item from '../Item/item';
 import './ItemList.scss'
 
-
 const ItemList = ({ productos = [] }) => {
 
-
   return (
-    <Container fluid className='products' >
+    <Container className='products' >
       <Row>
         <Col>
           <p>Productos</p>
