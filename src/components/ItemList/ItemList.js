@@ -10,7 +10,7 @@ const ItemList = ({ productos = [] }) => {
     <Container className='products' >
       <Row>
         <Col>
-          <p>Productos</p>
+          <h1>Productos</h1>
         </Col>
       </Row>
       <Row  >

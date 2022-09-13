@@ -14,6 +14,7 @@ $pink: #e84393;
 $black: #333;
 $white: #fff;
 $light-color: #666;
+$alert: #d63031;
 $light-bg: #eee;
 $border: 0.2rem solid $black;
 
@@ -85,6 +86,15 @@ $border: 0.2rem solid $black;
           color: $light-color;
         }
       }
+
+      .agregado {
+        text-align: center;
+        background: $alert;
+        color: $white;
+        border-radius: 0.5rem;
+        padding: 0.8rem;
+        margin: 1rem;
+      }
     }
 
     .btn {
@@ -97,6 +107,7 @@ $border: 0.2rem solid $black;
       background: none;
       cursor: pointer;
       border-radius: 0.5rem;
+
       &:hover {
         background: $black;
         color: $white;
