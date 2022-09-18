@@ -51,7 +51,10 @@ $border: .2rem solid $black;
       }
 
       .card-text {
-        p {
+        display: flex;
+        flex-direction: column;
+
+        .name {
           font-size: 1rem;
           color: $black;
           font-weight: 500;
@@ -62,6 +65,7 @@ $border: .2rem solid $black;
 
         .price{
           font-size: 1.5rem;
+          font-weight: bold;
 
           span{
             font-size: 2;

@@ -7,21 +7,28 @@ $light-bg: #eee;
 $border: 0.2rem solid $black;
 
 .icon {
+  visibility: hidden;
+  opacity: 0;
   display: block;
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: $black;
   cursor: pointer;
-  margin: 1.1rem;
-
+  margin: 1.8rem auto;
 
   &:hover {
     color: $pink;
   }
+}
+
+.icon-active {
+  visibility: visible;
+  opacity: 1;
+
 
   span {
     font-size: 2rem;
     color: $black;
     cursor: pointer;
-    margin: .5rem;
+    margin: 1rem .8rem;
   }
 }

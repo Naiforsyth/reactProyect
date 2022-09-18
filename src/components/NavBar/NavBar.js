@@ -2,6 +2,7 @@ import CartWidget from '../CartWidget/CartWidget'
 import './NavBar.scss'
 import { Link } from 'react-router-dom'
 
+
 const NavBar = () => {
 
   return (
@@ -19,7 +20,7 @@ const NavBar = () => {
           <li><Link to='/productos/x-view' className='list-item'>X-VIEW</Link></li>
           <li><Link to='/productos/philco' className='list-item'>PHILCO</Link></li>
           <li><Link to='/login' className='list-item'>Login</Link></li>
-          <li><Link to='/cart' className='icon'><CartWidget /></Link></li>
+          <li><CartWidget /></li>
         </ul>
       </nav>
     </header>

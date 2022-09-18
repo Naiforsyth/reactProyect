@@ -30,9 +30,7 @@ $border: 0.2rem solid $black;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-
-
-
+    
     .image-cart {
       overflow: hidden;
       width: 30%;
@@ -68,13 +66,13 @@ $border: 0.2rem solid $black;
         }
       }
 
-      .price-cart {
+      .price {
         font-size: 1.3rem;
         color: $black;
         text-align: center;
         margin: 1rem;
 
-        span {
+        .number {
           font-size: 1.5rem;
           color: $pink;
           font-weight: 700;

@@ -6,8 +6,8 @@ import './ItemDetail.scss'
 
 const ItemDetail = ({ item }) => {
 
-  const { cart, addToCart, isInCart } = useContext(CartContext)
-  console.log(cart)
+  const { addToCart, isInCart } = useContext(CartContext)
+
 
   const [cantidad, setCantidad] = useState(1)
 
@@ -20,11 +20,8 @@ const ItemDetail = ({ item }) => {
       precio: item.precio,
       cantidad: cantidad
     }
-
-    console.log(isInCart(item.id))
     addToCart(itemToCart)
   };
-
   return (
 
     <div className='box'>
@@ -37,24 +34,19 @@ const ItemDetail = ({ item }) => {
           <p className='price'>Precio: <span>{item.precio}</span></p>
           <p className='stock'>Disponible: <span>{item.stock}</span> </p>
           <br></br>
-
-          {
-            isInCart(item.id) && <p className='agregado'>Producto agregado al carrito</p>
-          }
-
           {
             isInCart(item.id)
-              ? <Link className='btn' to="/cart">Comprar</Link>
+              ? <>
+                <p className='agregado'>Producto agregado al carrito</p>
+                <Link className='btn' to="/cart">Terminar mi compra</Link>
+              </>
               : <ItemCount
                 stock={item.stock}
                 counter={cantidad}
                 setCantidad={setCantidad}
                 handleAgregar={handleAgregar}
-
               />
           }
-
-
         </div>
       </div>
     </div>
