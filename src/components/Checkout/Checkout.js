@@ -1,94 +1,153 @@
 import { useState } from "react";
 import { BsTruck } from "react-icons/bs";
 import "./Checkout.scss";
-import { useContext } from 'react';
-import { CartContext } from '../contexto/CartContext';
+import { useContext } from "react";
+import { CartContext } from "../contexto/CartContext";
 import { Link, Navigate } from "react-router-dom";
-import { addDoc, collection } from 'firebase/firestore'
-import { db } from '../../firebase/config'
- 
+import { addDoc, collection, writeBatch, query, where, documentId, getDocs } from "firebase/firestore";
+import { db } from "../../firebase/config";
+import Swal from "sweetalert2";
 
 const Checkout = () => {
+  const { cart, cartTotal, terminarCompra } = useContext(CartContext);
 
-  const { cart, cartTotal, terminarCompra } = useContext(CartContext)
-  
   const [values, setValues] = useState({
-    nombre: '',
-    apellido: '',
-    email: '',
-    direccion: '',
-    ciudad: '',
-    provincia: '',
-    codigoPostal: '',
-  })
+    nombre: "",
+    apellido: "",
+    email: "",
+    emailComprobado: "",
+    direccion: "",
+    ciudad: "",
+    provincia: "",
+    codigoPostal: "",
+  });
 
   const handleInputChange = (e) => {
     setValues({
       ...values,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     const orden = {
-
       buyer: values,
       items: cart,
-      total: cartTotal()
-    }
+      total: cartTotal(),
+    };
 
     if (values.nombre.length < 2) {
-      alert("Nombre incorrecto")
-      return
+      Swal.fire({
+        icon: 'error',
+        title: '¡Coloca tu nombre!',
+      })
+      return;
     }
 
     if (values.apellido.length < 2) {
-      alert("Apellido incorrecto")
-      return
+      Swal.fire({
+        icon: 'error',
+        title: '¡Coloca tu apellido!',
+      })
+      return;
     }
 
     if (values.email.length < 2) {
-      alert("Correo incorrecto")
+      Swal.fire({
+        icon: 'error',
+        title: '¡Coloca tu email!',
+      })
+      return;
+    }
+
+    if (values.emailComprobado !== values.email) {
+      Swal.fire({
+        icon: 'error',
+        title: '¡Los emails deben coincidir!',
+      })
       return
     }
 
     if (values.direccion.length < 2) {
-      alert("Direccion incorrecto")
-      return
+      Swal.fire({
+        icon: 'error',
+        title: '¡Coloca tu dirección!',
+      })
+      return;
     }
 
     if (values.ciudad.length < 2) {
-      alert("Ciudad incorrecto")
-      return
+      Swal.fire({
+        icon: 'error',
+        title: '¡Coloca tu ciudad!',
+      })
+      return;
     }
 
     if (values.provincia.length < 2) {
-      alert("Provincia incorrecto")
-      return
+      Swal.fire({
+        icon: 'error',
+        title: '¡Coloca tu provincia!',
+      })
+      return;
     }
 
     if (values.codigoPostal.length < 2) {
-      alert("Codigo Postal incorrecto")
-      return
+      Swal.fire({
+        icon: 'error',
+        title: '¡Coloca tu código postal!',
+      })
+      return;
     }
 
-    const ordenesRef = collection (db, 'ordenes')
+    const batch = writeBatch(db);
+    const ordenesRef = collection(db, "ordenes");
+    const productosRef = collection(db, "productos");
 
-    addDoc(ordenesRef, orden)
-      .then((doc) => {
-        terminarCompra(doc.id)
+    const consulta = query(
+      productosRef,
+      where(
+        documentId(),
+        "in",
+        cart.map((item) => item.id)
+      )
+    );
+
+    const productos = await getDocs(consulta);
+
+    const outOfStock = [];
+
+    productos.docs.forEach((doc) => {
+      const itemInCart = cart.find((item) => item.id === doc.id);
+
+      if (doc.data().stock >= itemInCart.cantidad) {
+        batch.update(doc.ref, {
+          stock: doc.data().stock - itemInCart.cantidad,
+        });
+      } else {
+        outOfStock.push(itemInCart);
+      }
+    });
+
+    if (outOfStock.length === 0) {
+      batch.commit().then(() => {
+        addDoc(ordenesRef, orden).then((doc) => {
+          terminarCompra(doc.id);
+        });
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: '¡Items sin stock!',
       })
-  }
-
+    }
+  };
 
   if (cart.length === 0) {
-    return <Navigate to="/" />
+    return <Navigate to="/" />;
   }
-
-
 
   return (
     <>
@@ -99,7 +158,6 @@ const Checkout = () => {
             <h2>Detalle de envío</h2>
 
             <div className="name">
-
               <div>
                 <label htmlFor="name">Nombre</label>
                 <input
@@ -123,7 +181,9 @@ const Checkout = () => {
                   name="apellido"
                 />
               </div>
+            </div>
 
+            <div className="name">
               <div>
                 <label htmlFor="lastName">Email</label>
                 <input
@@ -133,6 +193,18 @@ const Checkout = () => {
                   className="input-form"
                   placeholder="Email"
                   name="email"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="lastName">Confirmar Email</label>
+                <input
+                  value={values.emailComprobado}
+                  onChange={handleInputChange}
+                  type={"email"}
+                  className="input-form"
+                  placeholder="Email"
+                  name="emailComprobado"
                 />
               </div>
             </div>
@@ -167,7 +239,8 @@ const Checkout = () => {
                   onChange={handleInputChange}
                   type={"text"}
                   name="provincia"
-                  placeholder="Provincia" />
+                  placeholder="Provincia"
+                />
               </div>
               <div>
                 <label htmlFor="city">Código Postal</label>
@@ -176,13 +249,19 @@ const Checkout = () => {
                   onChange={handleInputChange}
                   type={"text"}
                   name="codigoPostal"
-                  placeholder="Código Postal" />
+                  placeholder="Código Postal"
+                />
               </div>
             </div>
+
             <div className="btns">
-              <button type={"submit"} className="btn-checkout"> Enviar
+              <button type={"submit"} className="btn-checkout">
+                {" "}
+                Enviar
               </button>
-              <Link className="btn-checkout" to={'/cart'}>Regresar al carrito</Link>
+              <Link className="btn-checkout" to={"/cart"}>
+                Regresar al carrito
+              </Link>
             </div>
           </form>
         </div>
@@ -190,6 +269,5 @@ const Checkout = () => {
     </>
   );
 };
-
 
 export default Checkout;

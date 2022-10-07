@@ -14,8 +14,8 @@ const Item = ({ producto }) => {
           <span className='name-card'>{producto.nombre}</span>
           <span className='price'> <span>${producto.precio}</span></span>
         </Card.Text>
-        <Link className='btn' to={`/item/${producto.id}`}>Ver más</Link>
-      </Card.Body>
+        <Link className='btn' to={`/item/${producto.id}`}>Ver más</Link>        
+      </Card.Body>     
     </Card>
   );
 };

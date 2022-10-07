@@ -22,6 +22,7 @@ const ItemDetail = ({ item }) => {
     }
     addToCart(itemToCart)
   };
+  
   return (
 
     <div className='box'>
@@ -34,7 +35,14 @@ const ItemDetail = ({ item }) => {
           <p className='price'>Precio: <span>{item.precio}</span></p>
           <p className='stock'>Disponible: <span>{item.stock}</span> </p>
           <br></br>
+          
           {
+            item.stock === 0
+            ?<>
+              <p className='agregado'>No hay stock disponible</p>
+              <Link className='btn' to='/'>Ir a catálogo</Link>
+            </>
+            :
             isInCart(item.id)
               ? <>
                 <p className='agregado'>Producto agregado al carrito</p>

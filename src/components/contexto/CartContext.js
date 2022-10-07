@@ -33,10 +33,10 @@ export const CartProvider = ({children}) =>{
     setCart([])
   } 
 
-  const terminarCompra = (id) => {
+  const terminarCompra = ( id) => {
     Swal.fire({
       title: 'Compra exitosa! 🛵',
-      text: `Tu número de orden es: ${id} `,
+      text: `Muchas gracias, tu número de orden es: ${id} `,
       icon: 'success',
       confirmButtonColor: '#3085d6',
       confirmButtonText: 'Genial! 😆'
