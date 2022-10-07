@@ -1,4 +1,4 @@
-**##Happy Tablets**
+**#Happy Tablets**
 
 Sean bienvenidos a mi ecommerce de tablets, desarrollado en React, Happy Tablets. 
 
@@ -6,7 +6,7 @@ Este ecommerce fue realizado como proyecto final para el curso de React de Coder
 
 Fue desarrollado con el paquete de Create React App y para el manejo de base de datos usamos Firebase.
 * * *
-**###Librerias**
+**##Librerias**
 -	React Bootstrap, para el maquetado.
 -	React Icons, para los iconos.
 -	Sweet Alert 2, para las alertas.
